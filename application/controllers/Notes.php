@@ -10,7 +10,7 @@ class Notes extends CI_Controller {
     public function create() {
     
         $this->load->view('header');
-        $this->load->view('body');
+        $this->load->view('dash');
         $this->load->view('notepad');
         $this->load->view('footer');
         
