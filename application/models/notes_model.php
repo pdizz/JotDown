@@ -16,10 +16,12 @@ class Notes_model extends CI_Model {
         
         $data = array(
             'title' => $this->input->post('title'),
-            'text' => $this->input->post('notes')
+            'text' => $this->input->post('notes'),
+            'user_id' => $this->ion_auth->user()->row()->id
+            
         );
         
-        return $this->db->insert('notes', $data); // returns booL???????
+        return $this->db->insert('notes', $data);
         
     }
     

@@ -10,7 +10,26 @@ root {
     display: block;
 }
 
-form input{
+#dashboard {
+    display: block;
+    width: 100%
+}
+
+#login_message {
+}
+
+#login_form {
+}
+
+#notes_form label {
+    display: block;
+    float: left;
+}
+#notes_form input {
+    display: block;
+}
+
+#save_button {
     display: block;
 }
 
