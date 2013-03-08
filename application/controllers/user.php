@@ -51,6 +51,17 @@ class User extends CI_Controller {
     
     public function register() {
         
+        $this->form_validation->set_rules('username', 'Username', 'required|xss_clean');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('new', 'New Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[new_confirm]');
+        $this->form_validation->set_rules('new_confirm', 'Confirm New Password', 'required');
+        
+        if ($this->form_validation->run() == true) {
+            $email = $this->input->post('email');
+            $password = $this->input->post('password');
+            
+            
+        
     }
     
 }
