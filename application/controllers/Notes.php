@@ -7,7 +7,7 @@ class Notes extends CI_Controller {
         $this->load->model('notes_model');
     }
     
-    public function create() {
+    public function index() {
     
         $this->load->view('header');
         $this->load->view('dash');
@@ -22,8 +22,12 @@ class Notes extends CI_Controller {
     
     public function save() {
         
+        // save current input for refresh
+        $this->session->set_flashdata('title', $this->input->post('title'));
+        $this->session->set_flashdata('notes', $this->input->post('notes'));
+        
         $this->notes_model->set_notes();
-        redirect('notes/create');
+        redirect('notes');
         
     }
     

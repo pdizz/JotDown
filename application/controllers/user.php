@@ -36,7 +36,7 @@ class User extends CI_Controller {
         
         }
         
-        redirect('notes/create');
+        redirect('notes');
         
         
 	
@@ -45,7 +45,7 @@ class User extends CI_Controller {
     public function logout() {
         
         $this->ion_auth->logout();
-        redirect('notes/create');
+        redirect('notes');
         
     }
     
