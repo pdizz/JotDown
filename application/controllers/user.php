@@ -53,13 +53,26 @@ class User extends CI_Controller {
         
         $this->form_validation->set_rules('username', 'Username', 'required|xss_clean');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-        $this->form_validation->set_rules('new', 'New Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[new_confirm]');
-        $this->form_validation->set_rules('new_confirm', 'Confirm New Password', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password]');
+        $this->form_validation->set_rules('confirm', 'Confirm Password', 'required');
         
         if ($this->form_validation->run() == true) {
+            $username = $this->input->post('username');
             $email = $this->input->post('email');
             $password = $this->input->post('password');
             
+            if ($this->ion_auth->register($username, $password, $email)) {
+                $this->ion_auth->login($this->input->post('email'), $this->input->post('password'), $remember);
+                redirect('notes');
+            }
+            else {
+                $this->session->set_flashdata('message', $this->ion_auth->errors());
+            }
+        }
+        else {
+            $this->session->set_flashdata('message', validation_errors());
+            $this->load->view('register');
+        }
             
         
     }
