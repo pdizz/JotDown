@@ -1,5 +1,3 @@
-<h1>JotDown</h1>
-
 <div id="dashboard">
     <?php if ($this->ion_auth->logged_in()): ?>
         <p>You are logged in as <?php echo $this->ion_auth->user()->row()->username; ?>.

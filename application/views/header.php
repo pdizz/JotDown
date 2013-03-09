@@ -4,3 +4,4 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/style.css">
     </header>
     <body>
+        <h1>JotDown</h1>

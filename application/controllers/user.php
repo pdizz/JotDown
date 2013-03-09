@@ -71,7 +71,10 @@ class User extends CI_Controller {
         }
         else {
             $this->session->set_flashdata('message', validation_errors());
+            
+            $this->load->view('header');
             $this->load->view('register');
+            $this->load->view('footer');
         }
             
         
