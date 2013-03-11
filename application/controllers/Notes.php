@@ -15,18 +15,42 @@ class Notes extends CI_Controller {
         $this->load->view('footer');
         
     }
-    
+       
     public function view() {
+        
+        // if user isnt logged in refresh with error message
+        if (!$this->ion_auth->logged_in()) {
+            $this->session->set_flashdata('message', 'Please log in to view your notes.');
+            redirect('notes');
+        }
+        
+        $data['notes'] = $this->notes_model->get_notes($this->ion_auth->user()->row()->id);
+        
+        $this->load->view('header');
+        $this->load->view('dash');
+        $this->load->view('notebook', $data);
+        $this->load->view('footer');
         
     }
     
+    /* TODO: change save() to update current entry if editing existing notes.
+     * implement edit()
+     */
+    
+    public function edit() {}
+
     public function save() {
         
-        // save current input for refresh
-        $this->session->set_flashdata('title', $this->input->post('title'));
-        $this->session->set_flashdata('notes', $this->input->post('notes'));
+        $title = $this->input->post('title');
+        $notes = $this->input->post('text');
         
-        $this->notes_model->set_notes();
+        // save current input for after refresh
+        $this->session->set_flashdata('title', $title);
+        $this->session->set_flashdata('text', $notes);
+        
+        // set notes in model and redirect
+        // TODO: check for errors
+        $this->notes_model->set_notes($title, $notes, $this->ion_auth->user()->row()->id);
         redirect('notes');
         
     }

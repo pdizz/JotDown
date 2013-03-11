@@ -1,7 +1,7 @@
 <div id="notepad">
 <?php
 $title = $this->session->flashdata('title');
-$notes = $this->session->flashdata('notes');
+$notes = $this->session->flashdata('text');
 
 $this->load->helper('form');
 echo form_open('notes/save', 'id="notes_form"');
@@ -9,7 +9,7 @@ echo form_open('notes/save', 'id="notes_form"');
     
     <label for="title">Title: </label>
     <input type="text" name="title" value="<?php echo $title; ?>" id="title" maxlength="64"  />
-    <textarea name="notes" cols="85" rows="30" id="notes" ><?php echo $notes; ?></textarea>
+    <textarea name="text" cols="85" rows="30" id="notes" ><?php echo $notes; ?></textarea>
 
 <!-- Can't save unless user logged in -->
     <?php if ($this->ion_auth->logged_in()): ?>
