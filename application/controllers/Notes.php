@@ -9,10 +9,17 @@ class Notes extends CI_Controller {
     
     
     public function index() {
+        
+        // blank data so notepad view doesn't cause error
+        $data['note'] = array(
+            'id' => '-1',
+            'title' => '',
+            'text' => ''
+            );
     
         $this->load->view('header');
         $this->load->view('dash');
-        $this->load->view('notepad');
+        $this->load->view('notepad', $data);
         $this->load->view('footer');
         
     }
@@ -51,6 +58,7 @@ class Notes extends CI_Controller {
         
         $user_id = $this->ion_auth->user()->row()->id;
         
+        // TODO: error handling
         $data['note'] = $this->notes_model->get_note_by_id($note_id);
         
         $this->load->view('header');
@@ -70,9 +78,12 @@ class Notes extends CI_Controller {
         $this->session->set_flashdata('title', $title);
         $this->session->set_flashdata('text', $notes);
         
-        // set notes in model and redirect
-        // TODO: check for errors
-        $this->notes_model->set_notes($note_id, $title, $notes, $this->ion_auth->user()->row()->id);
+        // set notes in model and get the new or updated ID
+        // TODO: error handling
+        $note_id = $this->notes_model->set_notes($note_id, $title, $notes, $this->ion_auth->user()->row()->id);
+        
+        
+        
         redirect('notes/edit/'.$note_id);
         
     }

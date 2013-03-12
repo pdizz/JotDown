@@ -44,10 +44,12 @@ class Notes_model extends CI_Model {
         // if note already exists just update it
         if ($this->note_exists($note_id)) {
             $this->db->where('id', $note_id);
-            return $this->db->update('notes', $data);
+            $this->db->update('notes', $data);
+            return $note_id;
         }
         else {
-            return $this->db->insert('notes', $data);
+            $this->db->insert('notes', $data);
+            return $this->db->insert_id();
         }
         
     }
