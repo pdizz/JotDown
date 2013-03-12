@@ -1,4 +1,5 @@
 */config/*
+*/ion_auth_samples/*
 */logs/log-*.php
 */logs/!index.html
 */cache/*
