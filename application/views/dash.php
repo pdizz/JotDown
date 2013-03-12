@@ -1,7 +1,7 @@
 <div id="dashboard">
     <?php if ($this->ion_auth->logged_in()): ?>
         <p>You are logged in as <?php echo $this->ion_auth->user()->row()->username; ?>.
-            <a href="../user/logout">Logout</a>
+            <a href="<?php echo base_url(); ?>user/logout">Logout</a>
         </p>
     
     <?php else: ?>

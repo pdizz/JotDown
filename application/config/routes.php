@@ -38,7 +38,7 @@
 |
 */
 $route['login'] = 'auth/login';
-$route['default_controller'] = 'notes/create';
+$route['default_controller'] = 'notes';
 $route['404_override'] = '';
 
 
